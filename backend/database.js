@@ -30,7 +30,9 @@ class Database {
      */
     async connect() {
         try {
-            console.log(`Database connecting...${this.connected}`);
+            if (process.env.NODE_ENV.trim() === 'development') {
+                console.log(`Database connecting...${this.connected}`);
+            }
             if (this.connected === false) {
                 this.poolconnection = await sql.connect(this.config);
                 this.connected = true;
@@ -73,7 +75,7 @@ class Database {
             await this.connect();
             const request = this.poolconnection.request();
             const result = await request.query(query);
-            await this.disconnect();
+            // await this.disconnect();
             return result;
         }
         catch (e) {

@@ -164,7 +164,9 @@ if (process.env.NODE_ENV.trim() === 'development') {
 }
 
 // Express setup
-app.use(logger('dev'));
+if (process.env.NODE_ENV.trim() === 'development') {
+    app.use(logger('dev'));
+}
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -172,7 +174,7 @@ app.use(cookieParser());
 // Configure nunjucks
 nunjucks.configure('../BakerySite', {
     autoescape: true,
-    express: app
+    express: app,
 });
 // Make it the view engine
 app.set('views', path.join(__dirname, '../BakerySite'));
@@ -273,7 +275,7 @@ if (process.env.NODE_ENV.trim() !== 'development') {
     // Optimized HTML asset serving
     const optimize_html_css_js = (req, res, next) => {
         const ext = path.extname(req.url).toLowerCase();
-        console.log(req.url)
+        // console.log(req.url)
 
         if (ext === '.html' || req.url.endsWith("/") || html_file_list.includes(req.url.substring(1) + ".html") || html_file_list.includes(req.url.substring(1, req.url.indexOf('?')) + ".html") || html_file_list.includes(req.url.substring(1, req.url.indexOf('?')))) {
             let original_html_path,
