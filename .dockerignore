@@ -3,3 +3,7 @@
 .idea/
 .vscode/
 backend/cache/*
+backend/PlayData/*
+backend/node_modules
+backend/test
+ERD_Images/
