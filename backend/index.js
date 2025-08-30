@@ -174,7 +174,7 @@ app.use(cookieParser());
 // Configure nunjucks
 nunjucks.configure('../BakerySite', {
     autoescape: true,
-    express: app,
+    express: app
 });
 // Make it the view engine
 app.set('views', path.join(__dirname, '../BakerySite'));
