@@ -944,6 +944,9 @@ async function renderTasks() {
     }
     catch (e) {
         console.error(e);
+        if (sessionID) {
+            localStorage.removeItem('session_id');
+        }
         // Return to home if the user is not logged in
         window.location.href = "/";
     }
